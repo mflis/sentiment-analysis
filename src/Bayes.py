@@ -6,8 +6,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 
 def count_parameters(phrases, labels):
-    vectorizer = CountVectorizer()
-    word_occurences = vectorizer.fit_transform(phrases)
+    word_occurences = doc_tem_matrix(phrases)
     class_probability = dict()
     class_word_occurences = dict()
     class_sum_of_words = dict()
@@ -17,6 +16,12 @@ def count_parameters(phrases, labels):
         class_word_occurences[x] = np.sum(word_occurences[class_indexes], axis=0)  # count(C,d)
         class_sum_of_words[x] = np.sum(class_word_occurences[x])  # V_c
     return class_probability, class_word_occurences, class_sum_of_words
+
+
+def doc_tem_matrix(phrases):
+    vectorizer = CountVectorizer()
+    word_occurences = vectorizer.fit_transform(phrases)
+    return word_occurences
 
 
 def segmentFileData(filename):
