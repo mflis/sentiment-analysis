@@ -4,7 +4,7 @@ from src import Config
 
 
 class Placeholders(object):
-    def __init__(self, config: Config.Config):
+    def __init__(self, config: Config):
         self.config = config
 
         with tf.name_scope('inputs'):

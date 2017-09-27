@@ -23,7 +23,7 @@ class Input(object):
         """Read pretrained GloVe vectors"""
         filepath = self.config.DEFAULT_FILE_PATH
         dimensions = self.config.EMBEDDING_SIZE
-        wordVectors = np.zeros((len(tokens) + 1, dimensions))
+        word_vectors = np.zeros((len(tokens) + 1, dimensions))
         with open(filepath) as ifs:
             for line in ifs:
                 line = line.strip()
@@ -37,8 +37,8 @@ class Input(object):
                 data = [float(x) for x in row[1:]]
                 if len(data) != dimensions:
                     raise RuntimeError("wrong number of dimensions")
-                wordVectors[tokens[token]] = np.asarray(data)
-        return wordVectors
+                word_vectors[tokens[token]] = np.asarray(data)
+        return word_vectors
 
     def readInput(self):
         phrases, labels = self.segmentFileData()
@@ -56,4 +56,4 @@ class Input(object):
         return data, embeddings, labels
 
     def __init__(self, config: Config):
-        self.config: Config = config
+        self.config = config

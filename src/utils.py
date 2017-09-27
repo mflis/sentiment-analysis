@@ -3,6 +3,7 @@ from typing import Tuple
 import tensorflow as tf
 
 
+# todo write some basic tests
 def split(tensor: tf.Tensor) -> Tuple[tf.Tensor, tf.Tensor, tf.Tensor]:
     train_frac = 0.8 * tensor.shape[0]
     val_test_frac = int(((1 - train_frac) / 2) * tensor.shape[0])

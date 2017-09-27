@@ -4,14 +4,16 @@ from src import Config, Placeholders
 
 
 class Model(object):
-    def __init__(self, config: Config.Config, placeholders: Placeholders.Placeholders):
+    def __init__(self, config: Config, placeholders: Placeholders):
         self.config = config
         self.placeholders = placeholders
-        self.initial_state: tf.Tensor = None
-        self.cost: tf.Tensor = None
-        self.optimizer: tf.Tensor = None
-        self.merged: tf.Tensor = None
-        self.accuracy: tf.Tensor = None
+        self.initial_state = None
+        self.final_state = None
+        self.cost = None
+        self.optimizer = None
+        self.merged = None
+        self.accuracy = None
+        self.cell = None
 
     def buildGraph(self):
         # Create the graph object
@@ -23,12 +25,13 @@ class Model(object):
 
         with tf.name_scope("RNN_layers"):
             # Stack up multiple LSTM layers, for deep learning
-            cell = tf.contrib.rnn.MultiRNNCell([self.get_single_cell()] * self.config.lstm_layers)
+            self.cell = tf.contrib.rnn.MultiRNNCell([self.get_single_cell()] * self.config.lstm_layers)
             # Getting an initial state of all zeros
-            self.initial_state = cell.zero_state(self.config.batch_size, tf.float32)  # todo maybe sth better than zero?
+            # todo maybe sth better than zero?
+            self.initial_state = self.cell.zero_state(self.config.batch_size, tf.float32)
 
         with tf.name_scope("RNN_forward"):
-            outputs, final_state = tf.nn.dynamic_rnn(cell, embed, initial_state=self.initial_state)
+            outputs, self.final_state = tf.nn.dynamic_rnn(self.cell, embed, initial_state=self.initial_state)
 
         with tf.name_scope('predictions'):
             predictions = tf.contrib.layers.fully_connected(outputs[:, -1], 1, activation_fn=tf.sigmoid)
