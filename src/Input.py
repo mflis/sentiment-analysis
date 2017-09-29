@@ -41,19 +41,20 @@ class Input(object):
         return word_vectors
 
     def readInput(self):
-        phrases, labels = self.segmentFileData()
-        tokenizer = keras.preprocessing.text.Tokenizer()
-        tokenizer.fit_on_texts(phrases)
-        sequences = tokenizer.texts_to_sequences(phrases)
-        word_index = tokenizer.word_index
-        print('Found %s unique tokens.' % len(word_index))
-        embeddings = self.loadWordVectors(word_index)
-        data = keras.preprocessing.sequence.pad_sequences(sequences, maxlen=self.config.PADDING_LENGTH)
-        data = tf.convert_to_tensor(data)
-        labels_array = np.asarray(labels)
-        labels = keras.utils.to_categorical(labels_array)
-        labels = tf.convert_to_tensor(labels)
-        return data, embeddings, labels
+        with self.config.graph.as_default():
+            phrases, labels = self.segmentFileData()
+            tokenizer = keras.preprocessing.text.Tokenizer()
+            tokenizer.fit_on_texts(phrases)
+            sequences = tokenizer.texts_to_sequences(phrases)
+            word_index = tokenizer.word_index
+            print('Found %s unique tokens.' % len(word_index))
+            embeddings = self.loadWordVectors(word_index)
+            data = keras.preprocessing.sequence.pad_sequences(sequences, maxlen=self.config.PADDING_LENGTH)
+            data = tf.convert_to_tensor(data)
+            labels_array = np.asarray(labels)
+            labels = keras.utils.to_categorical(labels_array)
+            labels = tf.convert_to_tensor(labels)
+            return data, embeddings, labels
 
     def __init__(self, config: Config):
         self.config = config

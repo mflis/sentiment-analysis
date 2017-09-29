@@ -1,3 +1,6 @@
+import tensorflow as tf
+
+
 class Config(object):
     """Holds model hyperparams and data information.
 
@@ -17,3 +20,4 @@ class Config(object):
     batch_size = 500
     learning_rate = 0.001
     epochs = 10
+    graph = tf.Graph()
