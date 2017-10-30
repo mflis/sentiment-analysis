@@ -1,3 +1,4 @@
+import csv
 import os
 
 import pandas as pd
@@ -14,9 +15,8 @@ dataPath = os.path.join(src.ROOT_DIR, 'data/AmazonReviews-raw.csv')
 nr_of_classes = 5
 seed = 7
 
-rawCSV = pd.read_csv(dataPath, nrows=20000, encoding='utf8', usecols=['Score', 'Text'],
-                     na_filter=False, memory_map=True, error_bad_lines=False)
-
+rawCSV = pd.read_csv(dataPath, encoding='utf8', nrows=20000, quoting=csv.QUOTE_NONE, usecols=['Score', 'Text'],
+                     na_filter=False, memory_map=True, dtype={'Score': str, 'Text': str})
 cleanedCSV = filter_invalid_data(rawCSV)
 texts = flatten(cleanedCSV.as_matrix(['Text']).tolist())
 scores = flatten(cleanedCSV.as_matrix(['Score']).tolist())
