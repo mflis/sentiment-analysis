@@ -42,10 +42,7 @@ Train on 25000 samples, validate on 25000 samples
 ## Conclusion
 -  load as many batches as you can
 - batch size 4096 is good starting point
-
-
-
-
+- open question: can too big batch size affect network's ability to learn?
 
 
 
@@ -53,8 +50,13 @@ Train on 25000 samples, validate on 25000 samples
 experiments on tf-idf + simple network example
 
 https://medium.com/towards-data-science/activation-functions-and-its-types-which-is-better-a9a5310cc8f
-- `relu` is good but only as intermediate layer (when used as output/last activation it performs worse than random guess)
--
+- `relu` is good but only as intermediate layer (when used as output/last activation it performs worse than random guess)(it's not designed to work with binary crossentropy)
+- `softmax` (as the last activation) - for some reason it doesn't learn anything. It always predicts 1, AUC is 0.5
+- open question: why soft max performed so badly?
+
+
+# weight initializations
+- change initializer from RandomNormal to `glorot_uniform (Xavier)` made huge difference (from AUC aroud 0.5 to AUC about 0.8)
 
 
 # feed-forward network

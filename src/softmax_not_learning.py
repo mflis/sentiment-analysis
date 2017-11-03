@@ -9,8 +9,8 @@ from src.helpers import *
 
 model = Sequential()
 
-model.add(Dense(VOCABULARY_LIMIT, input_dim=VOCABULARY_LIMIT, activation='relu'))
-model.add(Dense(1, activation='sigmoid'))
+model.add(Dense(int(VOCABULARY_LIMIT / 2), input_dim=VOCABULARY_LIMIT, activation='relu'))
+model.add(Dense(1, activation='softmax'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 auc = AucMetric((x_test, y_test))
