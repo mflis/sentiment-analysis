@@ -1,6 +1,7 @@
 import csv
 import os
 
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from tensorflow.contrib.keras.python.keras.preprocessing.text import Tokenizer
@@ -61,9 +62,17 @@ def get_test_train_set():
     tokenizer = get_tokenizer()
     columns = getColumns(dataPath(), ROW_LIMIT)
     texts, scores = columns
-    x_train_words, x_test_words, y_train, y_test = train_test_split(texts, scores, test_size=TEST_SPLIT,
+    scores_array = np.reshape(np.asarray(scores), (-1, 1))
+
+    # ros = RandomOverSampler(random_state=0)
+    x_train_words, x_test_words, y_train, y_test = train_test_split(texts, scores_array, test_size=TEST_SPLIT,
                                                                     random_state=RANDOM_SEED)
+    # X_resampled, y_resampled = ros.fit_sample(x_train_words, y_train)
+
     tokenizer.fit_on_texts(x_train_words)
+    # tokenizer.fit_on_texts(X_resampled)
+    # x_train = tokenizer.texts_to_matrix(X_resampled, mode='tfidf')
     x_train = tokenizer.texts_to_matrix(x_train_words, mode='tfidf')
     x_test = tokenizer.texts_to_matrix(x_test_words, mode='tfidf')
+    # return (x_train, y_resampled), (x_test, y_test)
     return (x_train, y_train), (x_test, y_test)

@@ -64,3 +64,4 @@ https://stats.stackexchange.com/questions/181/how-to-choose-the-number-of-hidden
   - one layer is usually enough (2 or more do not give much gains)
   - size of hidden layer (input layer + output layer)/2
 
+https://datascience.stackexchange.com/questions/806/advantages-of-auc-vs-standard-accuracy

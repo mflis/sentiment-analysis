@@ -1,5 +1,6 @@
 import os
 
+from src import auc_callback
 from src import helpers
 
 SRC_DIR = os.path.dirname(os.path.abspath(__file__))
