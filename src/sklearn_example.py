@@ -1,6 +1,6 @@
 from sklearn.linear_model import LogisticRegression
 
-from src.auc_callback import *
+from src.custom_metrics import *
 from src.helpers import *
 
 (x_train, y_train), (x_test, y_test) = get_test_train_set()

@@ -67,4 +67,4 @@
 # pyplot.ylabel('loss')
 # pyplot.xlabel('epoch')
 # pyplot.legend(['train', 'validation'], loc='upper right')
-# pyplot.savefig("myplot.pdf", bbox_inches='tight')
+# pyplot.savefig("myplot.png", bbox_inches='tight')

@@ -23,7 +23,7 @@ def filter_invalid_data(csv_columns: pd.DataFrame):
 
 
 def binarize_score(csv_raw: pd.DataFrame):
-    return csv_raw.Score.map(lambda x: 0 if int(x) < 3 else 1)
+    return csv_raw.Score.map(lambda x: 1 if int(x) < 3 else 0)
 
 
 # todo refactor into dict

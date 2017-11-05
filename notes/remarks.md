@@ -42,7 +42,6 @@ Train on 25000 samples, validate on 25000 samples
 ## Conclusion
 -  load as many batches as you can
 - batch size 4096 is good starting point
-- open question: can too big batch size affect network's ability to learn?
 
 
 
@@ -67,3 +66,16 @@ https://stats.stackexchange.com/questions/181/how-to-choose-the-number-of-hidden
   - size of hidden layer (input layer + output layer)/2
 
 https://datascience.stackexchange.com/questions/806/advantages-of-auc-vs-standard-accuracy
+
+# evaluation
+https://stats.stackexchange.com/questions/82162/cohens-kappa-in-plain-english - kappa can be used to show how much better our alogrith is than random
+https://classeval.wordpress.com/simulation-analysis/roc-and-precision-recall-with-imbalanced-datasets/ - precision/recall curve is better metric with imbalanced datasets
+
+
+# tuning
+https://www.youtube.com/watch?v=Lg6MZw_OOLI&index=14&list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6
+hyper parameter search
+grid search - too many possiblities
+set reasonable contraint on parameters, and sample alle of them 100 times, thrn take best one
+sgd batxh size matters, try smaller ones, because this is not convex problem, so we WANT noise from sgd to escape form local minima
+
