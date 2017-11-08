@@ -79,3 +79,7 @@ grid search - too many possiblities
 set reasonable contraint on parameters, and sample alle of them 100 times, thrn take best one
 sgd batxh size matters, try smaller ones, because this is not convex problem, so we WANT noise from sgd to escape form local minima
 
+
+# regularization
+- http://scholarworks.uark.edu/cgi/viewcontent.cgi?article=1028&context=csceuht - dropout should be applicable for simple networks too
+

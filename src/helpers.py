@@ -1,7 +1,10 @@
 import csv
 import os
 
+# noinspection PyUnresolvedReferences
+import numpy as np
 import pandas as pd
+from imblearn.under_sampling import RandomUnderSampler
 from sklearn.model_selection import train_test_split
 from tensorflow.contrib.keras.python.keras.preprocessing.text import Tokenizer
 
@@ -10,7 +13,6 @@ import src
 VOCABULARY_LIMIT = 5000
 RANDOM_SEED = 7
 TEST_SPLIT = 0.20
-ROW_LIMIT = 20000
 
 
 def flatten(vector):
@@ -57,33 +59,22 @@ def get_tokenizer():
                      num_words=VOCABULARY_LIMIT)
 
 
-def get_test_train_set():
-    # todo experiment with resampling
+def get_test_train_set(row_limit=1000, undersample=False):
     tokenizer = get_tokenizer()
-    columns = getColumns(dataPath(), ROW_LIMIT)
-    texts, scores = columns
+    texts, scores = getColumns(dataPath(), row_limit)
+
+    rus = RandomUnderSampler(random_state=RANDOM_SEED)
     x_train_words, x_test_words, y_train, y_test = train_test_split(texts, scores, test_size=TEST_SPLIT,
                                                                     random_state=RANDOM_SEED)
+    if undersample:
+        x_train_words, y_train = rus.fit_sample(conv(x_train_words), y_train)
+        x_train_words = np.reshape(x_train_words, (-1,))
+
     tokenizer.fit_on_texts(x_train_words)
     x_train = tokenizer.texts_to_matrix(x_train_words, mode='tfidf')
     x_test = tokenizer.texts_to_matrix(x_test_words, mode='tfidf')
     return (x_train, y_train), (x_test, y_test)
 
-# def get_test_train_set():
-#     tokenizer = get_tokenizer()
-#     columns = getColumns(dataPath(), ROW_LIMIT)
-#     texts, scores = columns
-#     scores_array = np.reshape(np.asarray(scores), (-1, 1))
-#
-#     # ros = RandomOverSampler(random_state=0)
-#     x_train_words, x_test_words, y_train, y_test = train_test_split(texts, scores_array, test_size=TEST_SPLIT,
-#                                                                     random_state=RANDOM_SEED)
-#     # X_resampled, y_resampled = ros.fit_sample(x_train_words, y_train)
-#
-#     tokenizer.fit_on_texts(x_train_words)
-#     # tokenizer.fit_on_texts(X_resampled)
-#     # x_train = tokenizer.texts_to_matrix(X_resampled, mode='tfidf')
-#     x_train = tokenizer.texts_to_matrix(x_train_words, mode='tfidf')
-#     x_test = tokenizer.texts_to_matrix(x_test_words, mode='tfidf')
-#     # return (x_train, y_resampled), (x_test, y_test)
-#     return (x_train, y_train), (x_test, y_test)
+
+def conv(list_arg):
+    return np.asarray(list_arg).reshape(-1, 1)
