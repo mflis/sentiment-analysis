@@ -7,8 +7,9 @@ from src.plots import *
 
 
 class CustomMetrics(Callback):
-    def __init__(self):
+    def __init__(self, tags):
         super(Callback, self).__init__()
+        self.tags = tags
 
     def evaluate(self):
         x_val = self.validation_data[0]
@@ -27,7 +28,7 @@ class CustomMetrics(Callback):
         plt.ylabel("Precision")
         plt.xlabel('Recall')
         plt.plot(recall, prec)
-        plt.savefig('../prec_recall_curves/{}.png'.format(src.CURRENT_TIME))
+        plt.savefig('../prec_recall_curves/{}-{}.png'.format(src.CURRENT_TIME, self.tags))
 
     def on_epoch_end(self, epoch, logs=None):
         x_val = self.validation_data[0]

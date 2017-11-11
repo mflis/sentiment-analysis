@@ -10,7 +10,7 @@ from tensorflow.contrib.keras.python.keras.preprocessing.text import Tokenizer
 
 import src
 
-VOCABULARY_LIMIT = 5000
+VOCABULARY_LIMIT = 10000
 RANDOM_SEED = 7
 TEST_SPLIT = 0.20
 

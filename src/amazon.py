@@ -1,28 +1,31 @@
 from tensorflow.contrib.keras.python.keras.callbacks import CSVLogger
 from tensorflow.contrib.keras.python.keras.layers import Dense
 from tensorflow.contrib.keras.python.keras.models import Sequential
+from tensorflow.contrib.keras.python.keras.regularizers import l2
 
 from src.custom_metrics import *
 from src.helpers import *
 from src.logger import *
 from src.plots import *
 
-print_source(__file__)
+tags = "l2=0.01 10k words"
+print_source(__file__, tags)
 
-(x_train, y_train), (x_test, y_test) = get_test_train_set(row_limit=500000, undersample=True)
+(x_train, y_train), (x_test, y_test) = get_test_train_set(row_limit=60000, undersample=True)
 
 model = Sequential()
 
-model.add(Dense(VOCABULARY_LIMIT, input_dim=VOCABULARY_LIMIT, activation='relu'))
+model.add(Dense(VOCABULARY_LIMIT, input_dim=VOCABULARY_LIMIT, activation='relu', kernel_regularizer=l2(0.01)))
 model.add(Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 model.summary()
 
-custom_metrics = CustomMetrics()
-csv = CSVLogger('../csv_logs/{}.csv'.format(src.CURRENT_TIME))
+custom_metrics = CustomMetrics(tags)
+csv = CSVLogger('../csv_logs/{}-{}.csv'.format(src.CURRENT_TIME, tags))
 history = model.fit(x_train, y_train, batch_size=4096, epochs=15,
                     validation_data=(x_test, y_test), callbacks=[custom_metrics, csv])
 plot_metric(history, 'auc')
+
 score = model.evaluate(x_test, y_test, batch_size=4096, verbose=0)
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
@@ -37,3 +40,7 @@ print(np.average(y))
 # activations
 # intermediate: relu, elu, selu, tanh, sigmoid
 # last: softmax, sigmoid
+
+
+# todo : to try
+# use top 10 k words - https://www.kaggle.com/ruzerichards/predicting-amazon-reviews-using-cnns
