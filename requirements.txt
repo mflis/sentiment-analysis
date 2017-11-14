@@ -1,6 +1,8 @@
+imblearn
 matplotlib
 scikit-learn
 h5py
 pandas
 numpy
 tensorflow
+imbalanced_learn

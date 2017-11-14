@@ -1,5 +1,5 @@
-from tensorflow.contrib.keras.python.keras.layers import Dense
-from tensorflow.contrib.keras.python.keras.models import Sequential
+from tensorflow.python.keras.layers import Dense
+from tensorflow.python.keras.models import Sequential
 
 from src.helpers import *
 
@@ -18,6 +18,7 @@ def create_baseline():
     return model
 
 
+ROW_LIMIT = 1000
 tokenizer = get_tokenizer()
 columns = getColumns(dataPath(), ROW_LIMIT)
 texts, scores = columns

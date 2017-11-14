@@ -12,11 +12,11 @@
 # '''
 # from __future__ import print_function
 #
-# from tensorflow.contrib.keras.python.keras.datasets import imdb
-# from tensorflow.contrib.keras.python.keras.layers import Dense, Embedding
-# from tensorflow.contrib.keras.python.keras.layers import LSTM
-# from tensorflow.contrib.keras.python.keras.models import Sequential
-# from tensorflow.contrib.keras.python.keras.preprocessing import sequence
+# from tensorflow.python.keras.datasets import imdb
+# from tensorflow.python.keras.layers import Dense, Embedding
+# from tensorflow.python.keras.layers import LSTM
+# from tensorflow.python.keras.models import Sequential
+# from tensorflow.python.keras.preprocessing import sequence
 # from src.helpers import ArgParser
 #
 # from matplotlib import pyplot

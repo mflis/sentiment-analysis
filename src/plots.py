@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import roc_curve, precision_recall_curve
-from tensorflow.contrib.keras.python.keras.callbacks import History
+from tensorflow.python.keras.callbacks import History
 
 import src
 

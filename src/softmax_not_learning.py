@@ -1,5 +1,5 @@
-from tensorflow.contrib.keras.python.keras.layers import Dense
-from tensorflow.contrib.keras.python.keras.models import Sequential
+from tensorflow.python.keras.layers import Dense
+from tensorflow.python.keras.models import Sequential
 
 from src.custom_metrics import *
 from src.helpers import *
@@ -12,7 +12,7 @@ model.add(Dense(int(VOCABULARY_LIMIT / 2), input_dim=VOCABULARY_LIMIT, activatio
 model.add(Dense(1, activation='softmax'))
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-auc = CustomMetrics()
+auc = CustomMetrics(tags="softmax not learing")
 history = model.fit(x_train, y_train, batch_size=4096, epochs=10,
                     validation_data=(x_test, y_test), callbacks=[auc])
 

@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.model_selection import train_test_split
-from tensorflow.contrib.keras.python.keras.preprocessing.text import Tokenizer
+from tensorflow.python.keras.preprocessing.text import Tokenizer
 
 import src
 

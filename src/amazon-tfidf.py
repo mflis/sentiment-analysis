@@ -1,7 +1,7 @@
-from tensorflow.contrib.keras.python.keras.callbacks import CSVLogger
-from tensorflow.contrib.keras.python.keras.layers import Dense
-from tensorflow.contrib.keras.python.keras.models import Sequential
-from tensorflow.contrib.keras.python.keras.regularizers import l2
+from tensorflow.python.keras.callbacks import CSVLogger
+from tensorflow.python.keras.layers import Dense
+from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.regularizers import l2
 
 from src.custom_metrics import *
 from src.helpers import *
