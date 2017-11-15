@@ -45,21 +45,22 @@ def plot_confusion_matrix(cm, classes,
 
 
 def show_confusion_matrix(y_true, y_pred):
-    class_names = ['pos', 'neg']
+    class_names = ['high\nscore', 'low\nscore']
     # Compute confusion matrix
+    plt.rcParams.update({'font.size': 22})
     cnf_matrix = confusion_matrix(y_true, y_pred)
     np.set_printoptions(precision=2)
 
     # Plot non-normalized confusion matrix
     plt.figure()
     plot_confusion_matrix(cnf_matrix, classes=class_names,
-                          title='Confusion matrix, without normalization')
+                          title="")
     plt.savefig("../confusions/{}.png".format(src.CURRENT_TIME), bbox_inches='tight')
 
     # Plot normalized confusion matrix
     plt.figure()
     plot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True,
-                          title='Normalized confusion matrix')
+                          )
     plt.savefig("../confusions/{}_normalized.png".format(src.CURRENT_TIME), bbox_inches='tight')
 
 
