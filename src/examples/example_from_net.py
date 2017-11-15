@@ -1,7 +1,7 @@
 from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.models import Sequential
 
-from src.helpers import *
+from src.mechanics.preprocessing.helpers import *
 
 
 # source

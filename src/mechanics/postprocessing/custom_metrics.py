@@ -10,7 +10,7 @@ from sklearn.metrics import recall_score, precision_recall_fscore_support
 from tensorflow.python import keras
 from tensorflow.python.keras.callbacks import Callback
 
-from src.plots import *
+from src.mechanics.postprocessing.plots import *
 
 
 def precision(y_true, y_pred):

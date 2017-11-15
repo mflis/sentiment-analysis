@@ -3,10 +3,10 @@ from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.regularizers import l2
 
-from src.custom_metrics import *
-from src.helpers import *
-from src.logger import *
-from src.plots import *
+from src.mechanics.postprocessing.custom_metrics import *
+from src.mechanics.postprocessing.logger import *
+from src.mechanics.postprocessing.plots import *
+from src.mechanics.preprocessing.helpers import *
 
 tags = "l2=0.01 10k words"
 print_source(__file__, tags)

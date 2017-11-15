@@ -20,8 +20,8 @@ from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.preprocessing.sequence import pad_sequences
 
 from src import ROOT_DIR
-from src.custom_metrics import *
-from src.helpers import *
+from src.mechanics.postprocessing.custom_metrics import *
+from src.mechanics.preprocessing.helpers import *
 
 BASE_DIR = os.path.join(ROOT_DIR, 'data')
 GLOVE_DIR = os.path.join(BASE_DIR, 'glove')

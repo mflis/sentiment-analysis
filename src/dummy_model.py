@@ -1,8 +1,8 @@
 from sklearn.dummy import DummyClassifier
 
-from src.custom_metrics import *
-from src.helpers import *
-from src.logger import *
+from src.mechanics.postprocessing.custom_metrics import *
+from src.mechanics.postprocessing.logger import *
+from src.mechanics.preprocessing.helpers import *
 
 tags = "random, full set"
 print_source(__file__, tags)
