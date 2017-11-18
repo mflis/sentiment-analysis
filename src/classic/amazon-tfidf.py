@@ -5,7 +5,7 @@ from tensorflow.python.keras.regularizers import l2
 
 from src.mechanics.postprocessing.custom_metrics import *
 from src.mechanics.postprocessing.logger import *
-from src.mechanics.postprocessing.plots import *
+from src.mechanics.postprocessing.metric_plots import plot_metric
 from src.mechanics.preprocessing.helpers import *
 
 tags = "l2=0.01 10k words"
@@ -42,5 +42,4 @@ print(np.average(y))
 # last: softmax, sigmoid
 
 
-# todo : to try
-# use top 10 k words - https://www.kaggle.com/ruzerichards/predicting-amazon-reviews-using-cnns
+# todo : to try use top 10 k words - https://www.kaggle.com/ruzerichards/predicting-amazon-reviews-using-cnns

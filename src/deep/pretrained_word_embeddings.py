@@ -19,11 +19,13 @@ from tensorflow.python.keras.layers import Embedding
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.preprocessing.sequence import pad_sequences
 
-from src import ROOT_DIR
+from src.mechanics.postprocessing.ImagesTensorBoard import ImagesTensorBoard
 from src.mechanics.postprocessing.custom_metrics import *
+from src.mechanics.postprocessing.metric_plots import plot_roc_curve, plot_prec_recall
+from src.mechanics.postprocessing.scalar_metrics import *
 from src.mechanics.preprocessing.helpers import *
 
-BASE_DIR = os.path.join(ROOT_DIR, 'data')
+BASE_DIR = os.path.join(src.ROOT_DIR, 'data')
 GLOVE_DIR = os.path.join(BASE_DIR, 'glove')
 TEXT_DATA_FILE = os.path.join(BASE_DIR, 'AmazonReviews-raw.csv')
 MAX_SEQUENCE_LENGTH = 1000
@@ -31,6 +33,8 @@ MAX_NB_WORDS = 20000
 EMBEDDING_DIM = 50
 VALIDATION_SPLIT = 0.2
 
+# todo reimplement this - http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/
+# todo make second balanced set and train on, compare to imbalanced set
 # first, build index mapping words in the embeddings set
 # to their embedding vector
 
@@ -110,22 +114,34 @@ model = Sequential()
 model.add(Dense(50, input_dim=MAX_SEQUENCE_LENGTH, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
-tensorboard = TensorBoard(log_dir=os.path.join(ROOT_DIR, 'logs'), histogram_freq=1, batch_size=128, write_grads=True)
+tensorboard = TensorBoard(log_dir=os.path.join(src.ROOT_DIR, 'logs'), histogram_freq=1, batch_size=128,
+                          write_grads=True)
 
-train_log_dir = os.path.join(ROOT_DIR, 'logs/train')
-val_log_dir = os.path.join(ROOT_DIR, 'logs/validation')
+train_log_dir = os.path.join(src.ROOT_DIR, 'results/logs1/{}-train'.format(src.CURRENT_TIME))
+val_log_dir = os.path.join(src.ROOT_DIR, 'results/logs1/{}-validation'.format(src.CURRENT_TIME))
 
-train_tboard_logger = FilterTensorBoard(log_dir=train_log_dir, write_graph=False,
+plots = {'roc-train': plot_roc_curve,
+         'prec-recall-train': plot_prec_recall,
+         'confusion-metrix-train': lambda y_true, y_pred, dest: ConfusionMatrix(y_true, y_pred).write_matrix(dest)}
+
+train_tboard_logger = ImagesTensorBoard(plotting_functions=plots,
+                                        suffix='train',
+                                        log_dir=train_log_dir,
+                                        write_graph=False,
                                         write_images=False, log_regex=r'^(?!val).*')
-val_tboard_logger = FilterTensorBoard(log_dir=val_log_dir, write_graph=False,
+
+val_tboard_logger = ImagesTensorBoard(plotting_functions=plots,
+                                      suffix='validation',
+                                      log_dir=val_log_dir, write_graph=False,
                                       write_images=False, log_regex=r"^val")
 # model = Model(sequence_input, preds)
 model.compile(loss='binary_crossentropy',
               optimizer='rmsprop',
-              metrics=['acc', recall])
-
+              metrics=['acc', recall, precision, roc_score])
+# todo read-  http://papers.nips.cc/paper/5867-precision-recall-gain-curves-pr-analysis-done-right.pdf
+# przejrzec pod kątem CNN - https://www.udacity.com/course/deep-learning--ud730
 model.fit(x_train, y_train,
           batch_size=128,
           epochs=10,
           validation_data=(x_test, y_test),
-          callbacks=[train_tboard_logger, val_tboard_logger])
+          callbacks=[train_tboard_logger, val_tboard_logger, ])

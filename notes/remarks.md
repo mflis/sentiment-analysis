@@ -71,6 +71,15 @@ https://datascience.stackexchange.com/questions/806/advantages-of-auc-vs-standar
 https://stats.stackexchange.com/questions/82162/cohens-kappa-in-plain-english - kappa can be used to show how much better our alogrith is than random
 https://classeval.wordpress.com/simulation-analysis/roc-and-precision-recall-with-imbalanced-datasets/ - precision/recall curve is better metric with imbalanced datasets
 
+http://people.inf.elte.hu/kiss/13dwhdm/roc.pdf
+- roc curve pokazuje jak sprawuje sie klasyfikator w generalnych warunkach, np gdy nie wiemy, czy rozkład positive/negative będzie 1/1, czy 1/10.
+Preceision-recall curve pokazuje performace przy założeniu konkretnego rozkladu positive/negative, czyli np gdy wiemy, że jest to 1/10
+Mozna wykonąc dodatkowe trnasoformacje na roc curve żeby wybrać optymalny classifer przy założonym koszcie pomylki i dystrybucji (6. The ROC convex hull)
+- 3.1. Random performance - dobre wytłumacznie dlaczego auc dla random classifier to 0.5
+#todo doczytac o gini classifier
+
+
+http://papers.nips.cc/paper/5867-precision-recall-gain-curves-pr-analysis-done-right.pdf - PR curve may not be so cool
 
 # tuning
 https://www.youtube.com/watch?v=Lg6MZw_OOLI&index=14&list=PL3FW7Lu3i5Jsnh1rnUwq_TcylNr7EkRe6

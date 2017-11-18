@@ -2,6 +2,7 @@ from sklearn.dummy import DummyClassifier
 
 from src.mechanics.postprocessing.custom_metrics import *
 from src.mechanics.postprocessing.logger import *
+from src.mechanics.postprocessing.metric_plots import plot_prec_recall, plot_roc_curve
 from src.mechanics.preprocessing.helpers import *
 
 tags = "random, full set"
