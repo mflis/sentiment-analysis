@@ -10,6 +10,7 @@ from tensorflow.python.keras.callbacks import Callback
 from src.mechanics.postprocessing.ConfusionMatrix import *
 
 
+# todo deprecated
 class CustomMetrics(Callback):
     def __init__(self, tags):
         super(Callback, self).__init__()
