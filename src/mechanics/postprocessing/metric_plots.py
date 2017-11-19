@@ -1,21 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from sklearn.metrics import precision_recall_curve, roc_curve
-from tensorflow.python.keras.callbacks import History
-
-import src
-
-
-# todo deprecated
-def plot_metric(history: History, name):
-    y = history.history[name][1:]
-    x = np.arange(2, len(y) + 2)
-    plt.figure()
-    plt.title(name)
-    plt.xlabel('epoch')
-    plt.ylabel(name)
-    plt.plot(x, y, 'ro')
-    plt.savefig("../metrics/{}_{}.png".format(src.CURRENT_TIME, name), bbox_inches='tight')
 
 
 def plot_prec_recall(y_true, y_pred, destination):

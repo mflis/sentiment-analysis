@@ -1,5 +1,4 @@
 import csv
-import os
 
 # noinspection PyUnresolvedReferences
 import numpy as np
@@ -7,8 +6,6 @@ import pandas as pd
 from imblearn.under_sampling import RandomUnderSampler
 from sklearn.model_selection import train_test_split
 from tensorflow.python.keras.preprocessing.text import Tokenizer
-
-import src
 
 VOCABULARY_LIMIT = 10000
 RANDOM_SEED = 7
@@ -43,8 +40,6 @@ def getColumns(filepath, rows_cut):
     return texts, scores
 
 
-def dataPath():
-    return os.path.join(src.ROOT_DIR, 'data/AmazonReviews-raw.csv')
 
 
 def read_csv(filepath, rows_cut):

@@ -1,3 +1,4 @@
+sacred
 imblearn
 matplotlib
 scikit-learn

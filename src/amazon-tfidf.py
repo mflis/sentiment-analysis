@@ -3,7 +3,6 @@ from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.models import Sequential
 from tensorflow.python.keras.regularizers import l2
 
-from src.mechanics.postprocessing.custom_metrics import *
 from src.mechanics.postprocessing.logger import *
 from src.mechanics.postprocessing.metric_plots import plot_metric
 from src.mechanics.preprocessing.helpers import *
