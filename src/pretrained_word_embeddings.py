@@ -21,9 +21,8 @@ def my_config(dataset, loggers):
     VALIDATION_SPLIT = 0.2
     MAX_SEQUENCE_LENGTH = dataset['MAX_SEQUENCE_LENGTH']
 
-
 # todo reimplement this - http://www.wildml.com/2015/12/implementing-a-cnn-for-text-classification-in-tensorflow/
-
+# todo code for preprocessing https://github.com/dennybritz/cnn-text-classification-tf/blob/master/data_helpers.py
 @cnn_experiment.automain
 def my_main(MAX_SEQUENCE_LENGTH, VALIDATION_SPLIT):
     sentences_scores, word_index, sentences = load_sentences()
