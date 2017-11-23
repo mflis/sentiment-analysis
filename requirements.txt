@@ -7,3 +7,5 @@ pandas
 numpy
 tensorflow
 imbalanced_learn
+pymongo
+GitPython

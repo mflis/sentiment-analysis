@@ -1,11 +1,14 @@
 from __future__ import print_function
 
 from sacred import Experiment
+from sacred.stflow import LogFileWriter
 from tensorflow.python.keras import Input
+from tensorflow.python.keras import backend as K
 from tensorflow.python.keras.activations import relu
 from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.layers import Dropout
 from tensorflow.python.keras.layers import GlobalMaxPooling2D
+from tensorflow.python.keras.layers import Lambda
 from tensorflow.python.keras.layers import concatenate
 from tensorflow.python.keras.models import Model
 from tensorflow.python.layers.convolutional import Conv2D
@@ -41,6 +44,7 @@ def my_config(dataset, loggers):
     epochs = 10
 
 
+
 @cnn_experiment.automain
 def my_main(max_sequence_length, validation_split, nr_of_filters, embedding_dim, filter_sizes, keep_prob, batch_size,
             epochs):
@@ -65,8 +69,9 @@ def my_main(max_sequence_length, validation_split, nr_of_filters, embedding_dim,
                   optimizer='adadelta',  # as in paper, article uses adam
                   metrics=['acc', recall, precision, roc_score])
 
-    model.fit(sentences, sentences_scores,
-              batch_size=batch_size,
-              epochs=epochs,
-              validation_split=validation_split,
-              callbacks=loggers() + checkpoints())
+    with LogFileWriter(cnn_experiment):
+        model.fit(sentences, sentences_scores,
+                  batch_size=batch_size,
+                  epochs=epochs,
+                  validation_split=validation_split,
+                  callbacks=loggers() + checkpoints())

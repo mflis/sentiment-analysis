@@ -14,11 +14,10 @@ data_ingredient = Ingredient('dataset')
 
 @data_ingredient.config
 def my_config():
-    sentences_file = 'balanced-reviews.csv'
-    glove_file = 'glove/glove.6B.50d.txt'
-    base_dir = os.path.join(ROOT_DIR, 'data')
-    sentences_path = os.path.join(base_dir, sentences_file)
-    glove_path = os.path.join(base_dir, '%s' % glove_file)
+    sentences_file = 'data/balanced-reviews.csv'
+    glove_file = 'data/glove/glove.6B.50d.txt'
+    sentences_path = os.path.join(ROOT_DIR, sentences_file)
+    glove_path = os.path.join(ROOT_DIR, glove_file)
     max_sequence_length = 100
     dictionary_limit = 20000
     embedding_dim = 50
