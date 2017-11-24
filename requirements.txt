@@ -9,3 +9,4 @@ tensorflow
 imbalanced_learn
 pymongo
 GitPython
+PyYAML
