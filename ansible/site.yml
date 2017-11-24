@@ -1,0 +1,22 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    # Spot instance example
+    - ec2:
+        spot_price: 0.90
+        spot_wait_timeout: 600
+        keypair: deep-test
+        group_id: sg-506a4523
+        instance_type: p2.xlarge
+        image: ami-4716b23d
+        wait: yes
+        exact_count: 1
+        aws_access_key: "{{ec2_access_key}}"
+        aws_secret_key: "{{ec2_secret_key}}"
+        region: us-east-1
+        zone: us-east-1a
+        instance_tags:
+          foo: bar
+        count_tag: foo
