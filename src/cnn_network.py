@@ -29,7 +29,7 @@ cnn_experiment = Experiment('config_cnn', ingredients=[data_ingredient, loggers_
 # todo code for preprocessing https://github.com/dennybritz/cnn-text-classification-tf/blob/master/data_helpers.py
 
 # todo read-  http://papers.nips.cc/paper/5867-precision-recall-gain-curves-pr-analysis-done-right.pdf
-# todo read https://arxiv.org/abs/1510.03820 -  co warto stosować w cnn
+# todo read https://arxiv.org/abs/1510.03820 -  what techniques improve cnn and what does not
 # przejrzec pod kątem CNN - https://www.udacity.com/course/deep-learning--ud730
 
 
