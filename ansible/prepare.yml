@@ -31,7 +31,6 @@
       command: bash /home/ec2-user/sentiment-analysis/balanced-set.sh
       args:
         chdir: /home/ec2-user/sentiment-analysis
-        creates: /home/ec2-user/sentiment-analysis/data/balanced-reviews.csv
 
     - name: install dependencies
       become: yes
