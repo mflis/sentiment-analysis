@@ -30,7 +30,7 @@ cnn_experiment = Experiment('config_cnn', ingredients=[data_ingredient, loggers_
 
 # todo read-  http://papers.nips.cc/paper/5867-precision-recall-gain-curves-pr-analysis-done-right.pdf
 # todo read https://arxiv.org/abs/1510.03820 -  what techniques improve cnn and what does not
-# przejrzec pod kątem CNN - https://www.udacity.com/course/deep-learning--ud730
+# look through CNN content - https://www.udacity.com/course/deep-learning--ud730
 
 
 @cnn_experiment.config
