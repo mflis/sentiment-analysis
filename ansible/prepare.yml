@@ -1,0 +1,39 @@
+- name: Prepare environment
+  hosts: all
+  gather_facts: False
+  tasks:
+    - name: clone repo
+      git:
+        repo: "https://mflis:{{ github_token }}@github.com/mflis/sentiment-analysis.git"
+        dest: /home/ec2-user/sentiment-analysis
+        force: yes
+
+    - name: Unarchive glove data
+      unarchive:
+        src: http://nlp.stanford.edu/data/glove.6B.zip
+        dest: /home/ec2-user/sentiment-analysis/data
+        creates: /home/ec2-user/sentiment-analysis/data/glove.6B.50d.txt
+        remote_src: yes
+
+    - name: install tree
+      become: true
+      yum:
+        name: tree
+        state: present
+
+    - name: install mongo
+      become: true
+      yum:
+        name: mongodb
+        state: present
+
+    - name: make balanced set
+      command: bash /home/ec2-user/sentiment-analysis/balanced-set.sh
+      args:
+        chdir: /home/ec2-user/sentiment-analysis
+        creates: /home/ec2-user/sentiment-analysis/data/balanced-reviews.csv
+
+    - name: install dependencies
+      become: yes
+      pip:
+       requirements: /home/ec2-user/sentiment-analysis/requirements.txt

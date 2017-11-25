@@ -1,0 +1,16 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+  tasks:
+    - name: Terminate Instance
+      ec2:
+        keypair: deep-test
+        region: us-east-1
+        instance_type: p2.xlarge
+        image: ami-4716b23d
+        count_tag: foo
+        exact_count: 0
+        aws_access_key: "{{ec2_access_key}}"
+        aws_secret_key: "{{ec2_secret_key}}"
+

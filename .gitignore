@@ -1,4 +1,4 @@
 .idea/
 ansible/group_vars/all/vault.yml
-ansible/ansible.cfg
+ansible/hosts
 *.retry
