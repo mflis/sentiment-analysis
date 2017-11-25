@@ -43,14 +43,12 @@ def my_config(dataset, loggers):
     filter_sizes = [3, 4, 5]
     batch_size = 128
     epochs = 10
-    mongo_url = "localhost:25000"
-    db_name = "experiments"
 
 
 @cnn_experiment.automain
 def my_main(max_sequence_length, validation_split, nr_of_filters, embedding_dim, filter_sizes, keep_prob, batch_size,
-            epochs, mongo_url, db_name):
-    cnn_experiment.observers.append(MongoObserver.create(mongo_url, db_name))
+            epochs):
+    cnn_experiment.observers.append(MongoObserver.create())
 
     sentences_scores, word_index, sentences = load_sentences()
     sequence_input = Input(shape=(max_sequence_length,), dtype='int32')
