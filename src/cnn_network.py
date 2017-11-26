@@ -32,6 +32,11 @@ cnn_experiment = Experiment('config_cnn', ingredients=[data_ingredient, loggers_
 # todo read https://arxiv.org/abs/1510.03820 -  what techniques improve cnn and what does not
 # look through CNN content - https://www.udacity.com/course/deep-learning--ud730
 
+# preprocessing as in paper
+# disct limit - analyze data and coverage
+# glove dimensions 300
+#
+
 
 @cnn_experiment.config
 def my_config(dataset, loggers):

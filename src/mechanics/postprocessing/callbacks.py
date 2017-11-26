@@ -44,4 +44,4 @@ def checkpoints(checkpoints_dir):
     path = os.path.join(checkpoint_base, checkpoint_file)
     # save_weights_only=True - workaround for problem  with saving model with lambda layer
     # http://forums.fast.ai/t/unable-to-save-model-checkpoints-when-using-lambda-in-model/827/7
-    return [ModelCheckpoint(path, save_weights_only=True)]
+    return [ModelCheckpoint(path, save_weights_only=True, save_best_only=True)]
