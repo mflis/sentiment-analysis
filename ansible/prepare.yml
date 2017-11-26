@@ -5,14 +5,23 @@
     - name: clone repo
       git:
         repo: "https://mflis:{{ github_token }}@github.com/mflis/sentiment-analysis.git"
-        dest: /home/ec2-user/sentiment-analysis
+        dest: ~/sentiment-analysis
         force: yes
+
+    - name: create directories
+      file:
+        path: "{{item}}"
+        state: directory
+      with_items:
+        - ~/sentiment-analysis/data/glove
+        - ~/sentiment-analysis/results/checkpoints
+        - ~/sentiment-analysis/results/logs
 
     - name: Unarchive glove data
       unarchive:
         src: http://nlp.stanford.edu/data/glove.6B.zip
-        dest: /home/ec2-user/sentiment-analysis/data
-        creates: /home/ec2-user/sentiment-analysis/data/glove.6B.50d.txt
+        dest: ~/sentiment-analysis/data/glove
+        creates: ~/sentiment-analysis/data/glove/glove.6B.50d.txt
         remote_src: yes
 
     - name: install tree
@@ -21,16 +30,12 @@
         name: tree
         state: present
 
-    - name: install mongo
-      become: true
-      yum:
-        name: mongodb
-        state: present
-
     - name: make balanced set
-      command: bash /home/ec2-user/sentiment-analysis/balanced-set.sh
+      command: bash ~/sentiment-analysis/balanced-set.sh
       args:
-        chdir: /home/ec2-user/sentiment-analysis
+        chdir: ~/sentiment-analysis
+        creates: /home/ec2-user/sentiment-analysis/data/balanced-reviews.csv
+
 
     - name: install dependencies
       become: yes

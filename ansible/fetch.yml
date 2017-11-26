@@ -1,0 +1,20 @@
+- name: Fetch results
+  hosts: all
+  gather_facts: False
+
+  tasks:
+    - synchronize:
+        src: ~/sentiment-analysis/results
+        dest: ~/PycharmProjects/tensorflow-playgound/remote-results
+        mode: pull
+    - synchronize:
+        src: ~/sentiment-analysis/logs-2
+        dest: ~/PycharmProjects/tensorflow-playgound/remote-results
+        mode: pull
+
+#todo
+#run module
+# run tensorflow, (stdout to file)
+# run tensorboard
+# sync data after
+# new schme of naming, shorter date more tags of config
