@@ -2,3 +2,7 @@
 ansible/group_vars/all/vault.yml
 ansible/hosts
 *.retry
+results/
+data/
+**/.ipynb_checkpoints
+**/__pycache__
