@@ -1,0 +1,5 @@
+- name: Prepare environment
+  hosts: all
+  gather_facts: False
+  tasks:
+    - script: python3 ~/sentiment-analysis/src/cnn_network.py with full_config.yaml  ''
