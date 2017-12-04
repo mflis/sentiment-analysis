@@ -15,9 +15,11 @@ data_ingredient = Ingredient('dataset')
 
 @data_ingredient.config
 def my_config():
-    sentences_file = 'data/balanced-reviews.csv'
+    train_sentences_file = 'data/balanced-reviews_train.csv'
+    test_sentences_file = 'data/balanced-reviews_val.csv'
     glove_file = 'data/glove/glove.6B.50d.txt'
-    sentences_path = os.path.join(ROOT_DIR, sentences_file)
+    train_sentences_path = os.path.join(ROOT_DIR, train_sentences_file)
+    test_sentences_path = os.path.join(ROOT_DIR, test_sentences_file)
     glove_path = os.path.join(ROOT_DIR, glove_file)
     max_sequence_length = 100
     dictionary_limit = 40000
@@ -30,11 +32,21 @@ def load_sentences(sentences_path, rows_cut, dictionary_limit, max_sequence_leng
     texts, labels = getColumns(sentences_path, rows_cut=rows_cut)
     cleaned_texts = [clean_str(x) for x in texts]
     tokenizer = Tokenizer(num_words=dictionary_limit)
-    tokenizer.fit_on_texts(texts)
-    sequences = tokenizer.texts_to_sequences(texts)
+    tokenizer.fit_on_texts(cleaned_texts)
+    sequences = tokenizer.texts_to_sequences(cleaned_texts)
     word_index = tokenizer.word_index
     data = pad_sequences(sequences, maxlen=max_sequence_length)
     return labels, word_index, data
+
+
+@data_ingredient.capture
+def load_test_sentences(test_sentences_path):
+    return load_sentences(sentences_path=test_sentences_path)
+
+
+@data_ingredient.capture
+def load_train_sentences(train_sentences_path):
+    return load_sentences(sentences_path=train_sentences_path)
 
 
 @data_ingredient.capture
@@ -60,7 +72,8 @@ def prepare_embedding_layer(glove_path, word_index, dictionary_limit, embedding_
             embedding_matrix[i] = embedding_vector
 
             #    note that we set trainable = False so as to keep the embeddings fixed
-    embedding_layer = Embedding(input_dim=num_words,
+    embedding_layer = Embedding(name="word_embeddings",
+                                input_dim=num_words,
                                 output_dim=embedding_dim,
                                 weights=[embedding_matrix],
                                 input_length=max_sequence_length,

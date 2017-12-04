@@ -13,14 +13,14 @@ loggers_ingredient = Ingredient('loggers')
 
 @loggers_ingredient.config
 def conf():
-    log_dir = 'results/logs1'
+    log_dir = 'results/logs'
     checkpoints_dir = 'results/checkpoints'
 
 
 @loggers_ingredient.capture
-def loggers(log_dir):
-    train_log_dir = os.path.join(ROOT_DIR, '{}/{}-train'.format(log_dir, CURRENT_TIME))
-    val_log_dir = os.path.join(ROOT_DIR, '{}/{}-validation'.format(log_dir, CURRENT_TIME))
+def loggers(log_dir, tag):
+    train_log_dir = os.path.join(ROOT_DIR, '{}/{}-{}-train'.format(log_dir, tag, CURRENT_TIME))
+    val_log_dir = os.path.join(ROOT_DIR, '{}/{}-{}-validation'.format(log_dir, tag, CURRENT_TIME))
     plots = {'roc-train': plot_roc_curve,
              'prec-recall-train': plot_prec_recall,
              'confusion-metrix-train': lambda y_true, y_pred, dest: ConfusionMatrix(y_true, y_pred).write_matrix(dest)}
@@ -37,8 +37,8 @@ def loggers(log_dir):
 
 
 @loggers_ingredient.capture
-def checkpoints(checkpoints_dir):
-    file_partial = "{}-model".format(CURRENT_TIME)
+def checkpoints(checkpoints_dir, tag):
+    file_partial = "{}-{}-model".format(tag, CURRENT_TIME)
     checkpoint_file = file_partial + "model.{epoch:02d}-{val_loss:.2f}.hdf5"
     checkpoint_base = os.path.join(ROOT_DIR, checkpoints_dir)
     path = os.path.join(checkpoint_base, checkpoint_file)
