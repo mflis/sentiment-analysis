@@ -1,14 +1,8 @@
 batch_size : 4096
 epochs : 10
 filter_sizes : [3, 4, 5]
-keep_prob : 0.5
 nr_of_filters : 100
-seed : 762291685                   # the random seed for this experiment
-validation_split : 0.2
 dataset:
-  dictionary_limit : 20000
-  embedding_dim : 50
-  max_sequence_length : 100
   rows_cut : 200000
 loggers:
   log_dir : 'results/logs-full-cnn'

@@ -89,6 +89,10 @@ set reasonable contraint on parameters, and sample alle of them 100 times, thrn 
 sgd batxh size matters, try smaller ones, because this is not convex problem, so we WANT noise from sgd to escape form local minima
 
 
+https://arxiv.org/abs/1510.03820 -  it's worth tuning filter size, maybe nr of filters, training variance is a problem
+https://machinelearningmastery.com/evaluate-skill-deep-learning-models/ - variance again
+
 # regularization
 - http://scholarworks.uark.edu/cgi/viewcontent.cgi?article=1028&context=csceuht - dropout should be applicable for simple networks too
+
 
