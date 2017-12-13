@@ -4,7 +4,6 @@ from sacred import Experiment
 from sacred.stflow import LogFileWriter
 from tensorflow.python.keras import Input
 from tensorflow.python.keras import backend as K
-from tensorflow.python.keras._impl.keras.utils.vis_utils import model_to_dot
 from tensorflow.python.keras.activations import relu
 from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.layers import Dropout
@@ -74,7 +73,7 @@ def my_main(max_sequence_length, nr_of_filters, embedding_dim, filter_sizes, kee
                   optimizer='adadelta',  # as in paper, article uses adam
                   metrics=['acc', recall, precision, roc_score])
 
-    model_to_dot(model).write('cnn_layers.pdf', format="pdf")
+    # model_to_dot(model).write('cnn_layers.pdf', format="pdf")
     with LogFileWriter(cnn_experiment):
         model.fit(sentences, sentences_scores,
                   batch_size=batch_size,
