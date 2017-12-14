@@ -24,20 +24,23 @@
         creates: ~/sentiment-analysis/data/glove/glove.6B.50d.txt
         remote_src: yes
 
-    - name: install tree
+    - name: install helper packages
       become: true
       yum:
-        name: tree
+        name: "{{ item  }}"
         state: present
-
-    - name: make balanced set
-      command: bash ~/sentiment-analysis/balanced-set.sh
-      args:
-        chdir: ~/sentiment-analysis
-        creates: /home/ec2-user/sentiment-analysis/data/balanced-reviews.csv
-
+      with_items:
+        - htop
+        - tree
 
     - name: install dependencies
       become: yes
       pip:
        requirements: /home/ec2-user/sentiment-analysis/requirements.txt
+
+    - name: make balanced set
+      command: python3 ~/sentiment-analysis/src/balanced_set.py
+      args:
+        chdir: ~/sentiment-analysis
+        creates: /home/ec2-user/sentiment-analysis/data/balanced-reviews_train.csv
+

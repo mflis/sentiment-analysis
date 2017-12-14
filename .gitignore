@@ -1,6 +1,6 @@
 .idea/
 ansible/group_vars/all/vault.yml
-ansible/hosts
+ansible/export_aws.sh
 *.retry
 results/
 data/

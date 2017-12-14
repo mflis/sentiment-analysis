@@ -2,4 +2,20 @@
   hosts: all
   gather_facts: False
   tasks:
-    - script: python3 ~/sentiment-analysis/src/cnn_network.py with full_config.yaml  ''
+#no obersvers in run
+    - name: Run tensorflow
+      command: python3 src/cnn_network.py with full_config.yaml 'epochs=100' 'batch_size={{item.1}}'
+      args:
+        chdir: /home/ec2-user/sentiment-analysis
+      delegate_to: "{{item.0}}"
+      async: 10000
+      poll: 60
+      with_together:
+        - "{{ groups['all'] }}"
+        - [64,4096]
+#        - [64,128,256,1024,4096]
+#
+    - name: Run tensorboard
+      command:  tensorboard  --logdir /home/ec2-user/sentiment-analysis/results/logs-full-cnn
+#      async: 1
+#      poll: 0
