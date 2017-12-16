@@ -78,5 +78,5 @@ def my_main(max_sequence_length, nr_of_filters, embedding_dim, filter_sizes, kee
         model.fit(sentences, sentences_scores,
                   batch_size=batch_size,
                   epochs=epochs,
-                  validation_data=(sentences_val, sentences_scores_val),
+                  validation_split=0.2,
                   callbacks=loggers(tag=tag) + checkpoints(tag=tag))
