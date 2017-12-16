@@ -15,16 +15,14 @@ data_ingredient = Ingredient('dataset')
 
 @data_ingredient.config
 def my_config():
-    train_sentences_file = 'data/balanced-reviews_train.csv'
-    test_sentences_file = 'data/balanced-reviews_val.csv'
+    sentences_file = 'data/balanced-reviews.csv'
     glove_file = 'data/glove/glove.6B.50d.txt'
-    train_sentences_path = os.path.join(ROOT_DIR, train_sentences_file)
-    test_sentences_path = os.path.join(ROOT_DIR, test_sentences_file)
+    sentences_path = os.path.join(ROOT_DIR, sentences_file)
     glove_path = os.path.join(ROOT_DIR, glove_file)
     max_sequence_length = 100
     dictionary_limit = 40000
     embedding_dim = 50
-    rows_cut = 100
+    rows_cut = 15
 
 
 @data_ingredient.capture

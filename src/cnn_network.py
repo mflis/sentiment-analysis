@@ -50,8 +50,8 @@ def my_config(dataset, loggers):
 @cnn_experiment.automain
 def my_main(max_sequence_length, nr_of_filters, embedding_dim, filter_sizes, keep_prob, batch_size,
             epochs, tag):
-    sentences_scores, word_index, sentences = load_train_sentences()
-    sentences_scores_val, _, sentences_val = load_test_sentences()
+    sentences_scores, word_index, sentences = load_sentences()
+
     sequence_input = Input(name="input_sentences", shape=(max_sequence_length,), dtype='int32')
     embedding = prepare_embedding_layer(word_index=word_index)(sequence_input)
     expanded_embedding = Lambda(name="add_channel_dim", function=lambda x: K.expand_dims(x, axis=-1))(embedding)
@@ -78,5 +78,5 @@ def my_main(max_sequence_length, nr_of_filters, embedding_dim, filter_sizes, kee
         model.fit(sentences, sentences_scores,
                   batch_size=batch_size,
                   epochs=epochs,
-                  validation_data=(sentences_val, sentences_scores_val),
+                  validation_split=0.2,
                   callbacks=loggers(tag=tag) + checkpoints(tag=tag))
