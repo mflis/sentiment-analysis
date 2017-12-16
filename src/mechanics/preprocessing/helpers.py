@@ -40,8 +40,6 @@ def getColumns(filepath, rows_cut):
     return texts, scores
 
 
-
-
 def read_csv(filepath, rows_cut):
     return pd.read_csv(filepath, encoding='utf8', nrows=rows_cut, quoting=csv.QUOTE_NONE, usecols=['Score', 'Text'],
                        na_filter=False, memory_map=True, dtype={'Score': str, 'Text': str})
