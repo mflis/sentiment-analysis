@@ -14,7 +14,6 @@ from tensorflow.python.keras.models import Model
 from tensorflow.python.layers.convolutional import Conv2D
 
 from mechanics.postprocessing.callbacks import *
-from mechanics.postprocessing.scalar_metrics import *
 from mechanics.preprocessing.read_data import *
 
 """
@@ -71,7 +70,7 @@ def my_main(max_sequence_length, nr_of_filters, embedding_dim, filter_sizes, kee
     model = Model(sequence_input, final_layer)
     model.compile(loss='binary_crossentropy',
                   optimizer='adadelta',  # as in paper, article uses adam
-                  metrics=['acc', recall, precision, roc_score])
+                  metrics=['acc'])
 
     # model_to_dot(model).write('cnn_layers.pdf', format="pdf")
     with LogFileWriter(cnn_experiment):
