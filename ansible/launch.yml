@@ -24,6 +24,13 @@
         count_tag: foo
       register: ec2
 
+    - name: Add new instance to host group
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: all
+      with_items: "{{ ec2.instances }}"
+
+
     - name: Wait for SSH to come up
       wait_for:
         host: "{{ item.public_dns_name }}"

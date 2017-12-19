@@ -1,6 +1,7 @@
 import os
 
 from sacred import Ingredient
+from tensorflow.python.keras._impl.keras.callbacks import EarlyStopping
 from tensorflow.python.keras._impl.keras.callbacks import ModelCheckpoint
 
 from definitions import ROOT_DIR, CURRENT_TIME
@@ -45,3 +46,7 @@ def checkpoints(checkpoints_dir, tag):
     # save_weights_only=True - workaround for problem  with saving model with lambda layer
     # http://forums.fast.ai/t/unable-to-save-model-checkpoints-when-using-lambda-in-model/827/7
     return [ModelCheckpoint(path, save_weights_only=True, save_best_only=True)]
+
+
+def earlyStop():
+    return EarlyStopping(monitor='val_loss', min_delta=0.01, patience=5, verbose=0, mode='auto')

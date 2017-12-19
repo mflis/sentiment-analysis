@@ -5,5 +5,5 @@
   tasks:
     - synchronize:
         src: ~/sentiment-analysis/results
-        dest: ~/PycharmProjects/tensorflow-playgound/remote-results-2
+        dest: ~/PycharmProjects/tensorflow-playgound/remote-results-tmp
         mode: pull

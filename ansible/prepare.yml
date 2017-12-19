@@ -15,7 +15,8 @@
       with_items:
         - ~/sentiment-analysis/data/glove
         - ~/sentiment-analysis/results/checkpoints
-        - ~/sentiment-analysis/results/logs
+        - ~/sentiment-analysis/results/logs-full-cnn
+        - ~/sentiment-analysis/results/sacred-logs
 
     - name: Unarchive glove data
       unarchive:
