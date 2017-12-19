@@ -3,18 +3,14 @@
   gather_facts: False
   tasks:
     - name: Run tensorflow
-      command: python3 src/cnn_network.py with full_config.yaml 'epochs=1' 'filter_sizes={{item.1}}'  --file_storage="results/sacred-logs/{{item.0}}"
+      command: python3 src/cnn_network.py with full_config.yaml 'epochs=100' 'filter_sizes={{item.1}}'  --file_storage="results/sacred-logs/{{item.0}}"
       args:
         chdir: /home/ec2-user/sentiment-analysis
-#      delegate_to: "{{item.0}}"
+      delegate_to: "{{item.0}}"
       async: 10000
-      poll: 0
+      poll: 60
       with_together:
         - "{{ groups['all'] }}"
-        - ["[2,2,2]","[5,5,5]"]
+        - ["[3,3,3]","[5,5,5]","[7,7,7]","[9,9,9]"]
 
-    - name: Wait until the for end file
-      wait_for:
-        path: ~/sentiment-analysis/ended
-        timeout: 10000
 

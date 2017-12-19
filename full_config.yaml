@@ -1,5 +1,5 @@
-batch_size : 4096
-epochs : 10
+batch_size : 64
+epochs : 100
 filter_sizes : [3, 4, 5]
 nr_of_filters : 100
 dataset:

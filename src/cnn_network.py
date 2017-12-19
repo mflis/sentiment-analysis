@@ -42,7 +42,7 @@ def my_config(dataset, loggers):
     keep_prob = 0.5
     nr_of_filters = 10
     filter_sizes = [3, 4, 5]
-    batch_size = 128
+    batch_size = 64
     epochs = 10
     tag = "batch={};f_sizes={};f_num={};embed_dim={};epochs={};".format(batch_size, filter_sizes, nr_of_filters,
                                                                         embedding_dim, epochs)
@@ -59,8 +59,8 @@ def my_main(max_sequence_length, nr_of_filters, embedding_dim, filter_sizes, kee
 
     # todo maybe specify kernel initializers
     convolutions = []
-    for filter_size in filter_sizes:
-        conv = Conv2D(nr_of_filters, name="filter_width_{}".format(filter_size),
+    for index, filter_size in enumerate(filter_sizes):
+        conv = Conv2D(nr_of_filters, name="filter_width_{}_index{}".format(filter_size, index),
                       kernel_size=(filter_size, embedding_dim), activation=relu)(expanded_embedding)
         pool = GlobalMaxPooling2D()(conv)
         convolutions.append(pool)
