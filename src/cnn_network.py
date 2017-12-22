@@ -80,6 +80,6 @@ def my_main(max_sequence_length, nr_of_filters, embedding_dim, filter_sizes, kee
                   batch_size=batch_size,
                   epochs=epochs,
                   validation_split=0.2,
-                  callbacks=loggers(tag=tag) + [earlyStop()])
+                  callbacks=loggers(tag=tag) + earlyStop())
 
     Path('ended').touch()

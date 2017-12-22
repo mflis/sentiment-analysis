@@ -49,4 +49,4 @@ def checkpoints(checkpoints_dir, tag):
 
 
 def earlyStop():
-    return EarlyStopping(monitor='val_loss', min_delta=0.01, patience=5, verbose=0, mode='auto')
+    return [EarlyStopping(monitor='val_loss', min_delta=0.01, patience=5, verbose=0, mode='auto')]

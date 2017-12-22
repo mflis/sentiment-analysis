@@ -3,11 +3,7 @@ import csv
 # noinspection PyUnresolvedReferences
 import numpy as np
 import pandas as pd
-from imblearn.under_sampling import RandomUnderSampler
-from sklearn.model_selection import train_test_split
-from tensorflow.python.keras.preprocessing.text import Tokenizer
 
-VOCABULARY_LIMIT = 10000
 RANDOM_SEED = 7
 TEST_SPLIT = 0.20
 
@@ -43,30 +39,6 @@ def getColumns(filepath, rows_cut):
 def read_csv(filepath, rows_cut):
     return pd.read_csv(filepath, encoding='utf8', nrows=rows_cut, quoting=csv.QUOTE_NONE, usecols=['Score', 'Text'],
                        na_filter=False, memory_map=True, dtype={'Score': str, 'Text': str})
-
-
-def get_tokenizer():
-    return Tokenizer(filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
-                     lower=True,
-                     split=" ",
-                     num_words=VOCABULARY_LIMIT)
-
-
-def get_test_train_set(row_limit=1000, undersample=False):
-    tokenizer = get_tokenizer()
-    texts, scores = getColumns(dataPath(), row_limit)
-
-    rus = RandomUnderSampler(random_state=RANDOM_SEED)
-    x_train_words, x_test_words, y_train, y_test = train_test_split(texts, scores, test_size=TEST_SPLIT,
-                                                                    random_state=RANDOM_SEED)
-    if undersample:
-        x_train_words, y_train = rus.fit_sample(conv(x_train_words), y_train)
-        x_train_words = np.reshape(x_train_words, (-1,))
-
-    tokenizer.fit_on_texts(x_train_words)
-    x_train = tokenizer.texts_to_matrix(x_train_words, mode='tfidf')
-    x_test = tokenizer.texts_to_matrix(x_test_words, mode='tfidf')
-    return (x_train, y_train), (x_test, y_test)
 
 
 def conv(list_arg):

@@ -3,12 +3,13 @@ import re
 
 import numpy as np
 from sacred import Ingredient
+from sklearn.model_selection import train_test_split
 from tensorflow.python.keras.layers import Embedding
 from tensorflow.python.keras.preprocessing.sequence import pad_sequences
 from tensorflow.python.keras.preprocessing.text import Tokenizer
 
 from definitions import ROOT_DIR
-from .helpers import getColumns
+from .helpers import getColumns, get_tokenizer
 
 data_ingredient = Ingredient('dataset')
 
@@ -23,6 +24,7 @@ def my_config():
     dictionary_limit = 40000
     embedding_dim = 50
     rows_cut = 15
+    vocabulary_limit = 10000
 
 
 @data_ingredient.capture
@@ -38,13 +40,22 @@ def load_sentences(sentences_path, rows_cut, dictionary_limit, max_sequence_leng
 
 
 @data_ingredient.capture
-def load_test_sentences(test_sentences_path):
-    return load_sentences(sentences_path=test_sentences_path)
+def get_data_tfidf(sentences_path, rows_cut):
+    tokenizer = get_tokenizer()
+    texts, scores = getColumns(sentences_path, rows_cut)
+    x_train_words, x_test_words, y_train, y_test = train_test_split(texts, scores, test_size=0.2)
+    tokenizer.fit_on_texts(x_train_words)
+    x_train = tokenizer.texts_to_matrix(x_train_words, mode='tfidf')
+    x_test = tokenizer.texts_to_matrix(x_test_words, mode='tfidf')
+    return (x_train, y_train), (x_test, y_test)
 
 
 @data_ingredient.capture
-def load_train_sentences(train_sentences_path):
-    return load_sentences(sentences_path=train_sentences_path)
+def get_tokenizer(vocabulary_limit):
+    return Tokenizer(filters='!"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n',
+                     lower=True,
+                     split=" ",
+                     num_words=vocabulary_limit)
 
 
 @data_ingredient.capture

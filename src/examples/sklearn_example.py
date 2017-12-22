@@ -1,9 +1,8 @@
 from sklearn.linear_model import LogisticRegression
 
 from src.mechanics.postprocessing.custom_metrics import *
-from src.mechanics.preprocessing.helpers import *
 
-(x_train, y_train), (x_test, y_test) = get_test_train_set()
+(x_train, y_train), (x_test, y_test) = get_data_tfidf()
 
 model = LogisticRegression()
 

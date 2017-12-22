@@ -1,10 +1,10 @@
+from src.mechanics.postprocessing.custom_metrics import *
 from tensorflow.python.keras.layers import Dense
 from tensorflow.python.keras.models import Sequential
 
-from src.mechanics.postprocessing.custom_metrics import *
 from src.mechanics.preprocessing.helpers import *
 
-(x_train, y_train), (x_test, y_test) = get_test_train_set()
+(x_train, y_train), (x_test, y_test) = get_data_tfidf()
 
 model = Sequential()
 
