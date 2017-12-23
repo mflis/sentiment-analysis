@@ -9,7 +9,7 @@ from tensorflow.python.keras.preprocessing.sequence import pad_sequences
 from tensorflow.python.keras.preprocessing.text import Tokenizer
 
 from definitions import ROOT_DIR
-from .helpers import getColumns, get_tokenizer
+from .helpers import getColumns
 
 data_ingredient = Ingredient('dataset')
 

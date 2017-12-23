@@ -10,9 +10,10 @@ tfidf_experiment = Experiment('config_tfidf', ingredients=[data_ingredient, logg
 
 
 @tfidf_experiment.config
-def my_config():
+def my_config(dataset, loggers):
     batch_size = 64
     epochs = 10
+    vocabulary_limit = dataset['vocabulary_limit']
     tag = "batch={};epochs={};".format(batch_size, epochs)
 
 
