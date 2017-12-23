@@ -16,6 +16,7 @@
         - ~/sentiment-analysis/data/glove
         - ~/sentiment-analysis/results/checkpoints
         - ~/sentiment-analysis/results/logs-full-cnn
+        - ~/sentiment-analysis/results/logs-full-tfidf
         - ~/sentiment-analysis/results/sacred-logs
 
     - name: Unarchive glove data
@@ -43,5 +44,5 @@
       command: python3 ~/sentiment-analysis/src/balanced_set.py
       args:
         chdir: ~/sentiment-analysis
-        creates: /home/ec2-user/sentiment-analysis/data/balanced-reviews_train.csv
+        creates: /home/ec2-user/sentiment-analysis/data/balanced-reviews.csv
 

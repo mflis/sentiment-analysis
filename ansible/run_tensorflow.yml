@@ -3,14 +3,11 @@
   gather_facts: False
   tasks:
     - name: Run tensorflow
-      command: python3 src/cnn_network.py with full_config.yaml 'epochs=100' 'filter_sizes={{item.1}}'  --file_storage="results/sacred-logs/{{item.0}}"
+      command: python3 src/amazon-tfidf.py with full_config_tfidf.yaml  --file_storage="results/sacred-logs/{{item.0}}"
       args:
         chdir: /home/ec2-user/sentiment-analysis
       delegate_to: "{{item.0}}"
       async: 10000
       poll: 60
-      with_together:
+      with_items:
         - "{{ groups['all'] }}"
-        - ["[3,3,3]","[5,5,5]","[7,7,7]","[9,9,9]"]
-
-
