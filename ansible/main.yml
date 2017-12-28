@@ -1,6 +1,6 @@
 ---
 - import_playbook: launch.yml
 - import_playbook: prepare.yml
-- import_playbook: run_tensorflow.yml
-- import_playbook: fetch.yml
-- import_playbook: terminate.yml
+- import_playbook: run_tensorflow_cnn.yml
+- import_playbook: fetch_single.yml
+- import_playbook: terminate_single.yml

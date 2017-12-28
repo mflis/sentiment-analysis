@@ -1,5 +1,5 @@
 - name: Prepare environment
-  hosts: all
+  hosts: launched
   gather_facts: False
   tasks:
     - name: clone repo

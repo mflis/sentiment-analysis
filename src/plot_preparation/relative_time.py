@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pandas as pd
 
-current_plot_dir = "cnn_batch_size"
-target_plot_dir = "{}_smoothed".format(current_plot_dir)
+current_plot_dir = "tf-idf_batch_size"
+target_plot_dir = "{}_processed".format(current_plot_dir)
 ROOT_PLOT_DIR = os.path.abspath(
     os.path.join(Path.home(),
                  "Desktop/SemestrVII/INZYNIERKA/sentiment-analysis-thesis/praca-inzynierska/plot_data"))

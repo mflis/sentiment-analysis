@@ -1,0 +1,10 @@
+- name: Run experiment
+  hosts: launched
+  tasks:
+    - name: Run tensorflow
+      command: python3 src/cnn_network.py with full_config_cnn.yaml 'filter_sizes={{param}}' --file_storage="results/sacred-logs/{{ ansible_default_ipv4.address }}"
+      args:
+        chdir: /home/ec2-user/sentiment-analysis
+      async: 10000
+      poll: 60
+

@@ -1,0 +1,13 @@
+- name: Terminate instances
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Terminate instances that were previously launched
+      ec2:
+        region: us-east-1
+        keypair: deep-test
+        state: 'absent'
+        instance_ids: '{{ ec2.instance_ids }}'
+        aws_access_key: "{{ec2_access_key}}"
+        aws_secret_key: "{{ec2_secret_key}}"
+
