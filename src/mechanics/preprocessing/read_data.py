@@ -86,7 +86,7 @@ def prepare_embedding_layer(glove_path, word_index, dictionary_limit, embedding_
                                 output_dim=embedding_dim,
                                 weights=[embedding_matrix],
                                 input_length=max_sequence_length,
-                                trainable=False)
+                                trainable=True)
     return embedding_layer
 
 
