@@ -25,6 +25,7 @@ def my_config():
     embedding_dim = 50
     rows_cut = 15
     vocabulary_limit = 10000
+    embedding_trainable = True
 
 
 @data_ingredient.capture
@@ -59,7 +60,8 @@ def get_tokenizer(vocabulary_limit):
 
 
 @data_ingredient.capture
-def prepare_embedding_layer(glove_path, word_index, dictionary_limit, embedding_dim, max_sequence_length):
+def prepare_embedding_layer(glove_path, word_index, dictionary_limit, embedding_dim, max_sequence_length,
+                            embedding_trainable):
     embeddings_index = {}
     f = open(glove_path)
     for line in f:
@@ -86,7 +88,7 @@ def prepare_embedding_layer(glove_path, word_index, dictionary_limit, embedding_
                                 output_dim=embedding_dim,
                                 weights=[embedding_matrix],
                                 input_length=max_sequence_length,
-                                trainable=True)
+                                trainable=embedding_trainable)
     return embedding_layer
 
 

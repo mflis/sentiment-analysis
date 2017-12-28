@@ -37,13 +37,16 @@ cnn_experiment = Experiment('config_cnn', ingredients=[data_ingredient, loggers_
 def my_config(dataset, loggers):
     max_sequence_length = dataset['max_sequence_length']
     embedding_dim = dataset['embedding_dim']
+    embedding_trainable = dataset["embedding_trainable"]
     keep_prob = 0.5
     nr_of_filters = 10
     filter_sizes = [3, 4, 5]
     batch_size = 64
     epochs = 10
-    tag = "batch={};f_sizes={};f_num={};embed_dim={};epochs={};".format(batch_size, filter_sizes, nr_of_filters,
-                                                                        embedding_dim, epochs)
+    tag = "batch={};f_sizes={};f_num={};embed_dim={};epochs={};embed_trainable".format(batch_size, filter_sizes,
+                                                                                       nr_of_filters,
+                                                                                       embedding_dim, epochs,
+                                                                                       embedding_trainable)
 
 
 @cnn_experiment.automain
