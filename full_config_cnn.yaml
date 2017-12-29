@@ -4,5 +4,7 @@ filter_sizes : [3, 4, 5]
 nr_of_filters : 100
 dataset:
   rows_cut : 200000
+  glove_file: 'data/glove/glove.6B.300d.txt'
+  embedding_dim: 300
 loggers:
   log_dir : 'results/logs-full-cnn'

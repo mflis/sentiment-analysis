@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 
-current_plot_dir = "tf-idf_batch_size"
+current_plot_dir = "cnn_static_vs_nonstatic"
 target_plot_dir = "{}_processed".format(current_plot_dir)
 ROOT_PLOT_DIR = os.path.abspath(
     os.path.join(Path.home(),
