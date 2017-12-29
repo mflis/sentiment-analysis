@@ -5,5 +5,5 @@
   tasks:
     - synchronize:
         src: ~/sentiment-analysis/results
-        dest: ~/PycharmProjects/tensorflow-playgound/remote-results-cnn-filter-sizes
+        dest: ~/PycharmProjects/tensorflow-playgound/remote-results-cnn-nr-of-filters
         mode: pull
