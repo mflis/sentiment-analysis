@@ -43,10 +43,10 @@ def my_config(dataset, loggers):
     filter_sizes = [3, 4, 5]
     batch_size = 64
     epochs = 10
-    tag = "batch={};f_sizes={};f_num={};embed_dim={};epochs={};embed_trainable".format(batch_size, filter_sizes,
-                                                                                       nr_of_filters,
-                                                                                       embedding_dim, epochs,
-                                                                                       embedding_trainable)
+    tag = "batch={};f_sizes={};f_num={};embed_dim={};epochs={};embed_trainable={}".format(batch_size, filter_sizes,
+                                                                                          nr_of_filters,
+                                                                                          embedding_dim, epochs,
+                                                                                          embedding_trainable)
 
 
 @cnn_experiment.automain
