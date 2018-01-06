@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 
-current_plot_dir = "cnn_static_vs_nonstatic"
+current_plot_dir = "cnn_nr_of_filters"
 target_plot_dir = "{}_processed".format(current_plot_dir)
 ROOT_PLOT_DIR = os.path.abspath(
     os.path.join(Path.home(),
