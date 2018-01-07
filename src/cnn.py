@@ -49,12 +49,15 @@ def cnn_main(max_sequence_length, nr_of_filters, embedding_dim,
     sequence_input = Input(name="input_sentences",
                            shape=(max_sequence_length,), dtype='int32')
     embedding = prepare_embedding_layer(word_index=word_index)(sequence_input)
-    expanded_embedding = Lambda(name="add_channel_dim", function=lambda x: K.expand_dims(x, axis=-1))(embedding)
+    expanded_embedding = Lambda(name="add_channel_dim",
+                                function=lambda x: K.expand_dims(x, axis=-1))(embedding)
 
     convolutions = []
     for index, filter_size in enumerate(filter_sizes):
-        conv = Conv2D(nr_of_filters, name="filter_width_{}_index{}".format(filter_size, index),
-                      kernel_size=(filter_size, embedding_dim), activation=relu)(expanded_embedding)
+        conv = Conv2D(nr_of_filters,
+                      name="filter_width_{}_index{}".format(filter_size, index),
+                      kernel_size=(filter_size, embedding_dim),
+                      activation=relu)(expanded_embedding)
         pool = GlobalMaxPooling2D()(conv)
         convolutions.append(pool)
     pooled_layers = concatenate(convolutions)

@@ -22,7 +22,8 @@ def tfidf_main(vocabulary_limit, epochs, batch_size, tag):
     (x_train, y_train), (x_test, y_test) = get_data_tfidf()
 
     model = Sequential()
-    model.add(Dense(vocabulary_limit, input_dim=vocabulary_limit, activation='relu', kernel_regularizer=l2(0.01)))
+    model.add(Dense(vocabulary_limit, input_dim=vocabulary_limit,
+                    activation='relu', kernel_regularizer=l2(0.01)))
     model.add(Dense(1, activation='sigmoid'))
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
     model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs,
