@@ -1,0 +1,8 @@
+- name: Terminate instances that were previously launched
+  ec2:
+    region: "{{ aws_region }}"
+    keypair: "{{ aws_keypair }}"
+    state: 'absent'
+    instance_ids: '{{ ec2.instance_ids }}'
+    aws_access_key: "{{ec2_access_key}}"
+    aws_secret_key: "{{ec2_secret_key}}"

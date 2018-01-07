@@ -1,0 +1,12 @@
+- name: Run tensorboard
+  command:  tensorboard  --logdir /home/ec2-user/sentiment-analysis/results/logs
+  async: 50000
+  poll: 0
+
+- name: Run tensorflow
+  command: python3 {{main}} with full_config_cnn.yaml '{{param}}' --file_storage="sacred-logs/{{ ansible_default_ipv4.address }}"
+  args:
+    chdir: /home/ec2-user/sentiment-analysis
+  async: 50000
+  poll: 60
+

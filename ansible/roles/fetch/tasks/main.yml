@@ -1,0 +1,4 @@
+- synchronize:
+    src: ~/sentiment-analysis/results/
+    dest: "~/PycharmProjects/tensorflow-playgound/remote-results/{{ fetch_dir }}"
+    mode: pull

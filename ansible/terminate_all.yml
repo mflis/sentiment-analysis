@@ -9,7 +9,7 @@
         region: us-east-1
         instance_type: p2.xlarge
         image: ami-4716b23d
-        count_tag: foo
+        count_tag: instance_type
         exact_count: 0
         aws_access_key: "{{ec2_access_key}}"
         aws_secret_key: "{{ec2_secret_key}}"

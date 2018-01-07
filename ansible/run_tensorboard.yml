@@ -1,8 +1,0 @@
-- name: Prepare environment
-  hosts: all
-  gather_facts: False
-  tasks:
-    - name: Run tensorboard
-      command:  tensorboard  --logdir /home/ec2-user/sentiment-analysis/results/logs-full-tfidf
-      async: 10000
-      poll: 60

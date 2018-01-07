@@ -1,9 +1,0 @@
-- name: Fetch results
-  hosts: launched
-  gather_facts: False
-
-  tasks:
-    - synchronize:
-        src: ~/sentiment-analysis/results
-        dest: ~/PycharmProjects/tensorflow-playgound/remote-results-nr-of-filters
-        mode: pull

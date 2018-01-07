@@ -2,3 +2,7 @@
 ec2_access_key: "{{ vault_ec2_access_key }}"
 ec2_secret_key: "{{ vault_ec2_secret_key }}"
 github_token: "{{ vault_github_token }}"
+aws_security_group: "{{ aws_security_group }}"
+aws_keypair: "{{ aws_security_group }}"
+aws_region: us-east-1
+aws_zone: us-east-1a

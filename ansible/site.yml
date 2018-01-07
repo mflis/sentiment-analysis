@@ -1,0 +1,15 @@
+- hosts: localhost
+  connection: local
+  roles:
+  - launch
+
+- hosts: launched
+  roles:
+  - prepare
+#  - tensorflow
+#  - fetch
+
+- hosts: localhost
+  connection: local
+  roles:
+  - terminate

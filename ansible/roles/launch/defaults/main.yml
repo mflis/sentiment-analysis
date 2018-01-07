@@ -1,0 +1,4 @@
+aws_instance_type: p2.xlarge
+
+#Deep Learning AMI (Amazon Linux) for region us-east-1
+aws_ami_image: ami-4716b23d
