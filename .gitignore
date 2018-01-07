@@ -2,7 +2,8 @@
 ansible/group_vars/all/vault.yml
 ansible/export_aws.sh
 *.retry
-results_all
+results_all/
+results/
 data/
 **/.ipynb_checkpoints
 **/__pycache__
