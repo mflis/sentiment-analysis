@@ -2,5 +2,3 @@ batch_size : 64
 epochs : 100
 dataset:
   rows_cut : 200000
-loggers:
-  log_dir : 'results/logs-full-tfidf'
