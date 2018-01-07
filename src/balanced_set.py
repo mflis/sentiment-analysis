@@ -1,7 +1,7 @@
 import os
 
 from definitions import ROOT_DIR
-from mechanics.preprocessing.helpers import read_csv
+from mechanics.preprocessing.preprocessing import read_csv
 
 
 def filter_scores(scores, csv):

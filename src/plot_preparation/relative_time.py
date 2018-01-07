@@ -6,8 +6,8 @@ import pandas as pd
 current_plot_dir = "cnn_nr_of_filters"
 target_plot_dir = "{}_processed".format(current_plot_dir)
 ROOT_PLOT_DIR = os.path.abspath(
-    os.path.join(Path.home(),
-                 "Desktop/SemestrVII/INZYNIERKA/sentiment-analysis-thesis/praca-inzynierska/plot_data"))
+    os.path.join(Path.home(), ("Desktop/SemestrVII/INZYNIERKA/"
+                               "sentiment-analysis-thesis/praca-inzynierska/plot_data")))
 
 os.makedirs(os.path.join(ROOT_PLOT_DIR, target_plot_dir), exist_ok=True)
 plot_files = os.listdir(os.path.join(ROOT_PLOT_DIR, current_plot_dir))

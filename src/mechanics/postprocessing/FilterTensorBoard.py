@@ -9,6 +9,8 @@ class FilterTensorBoard(keras.callbacks.TensorBoard):
     Intended to separate train/validation logs
     Keras adds "val_" to the beginning of all the validation metrics
     so we can include (or exclude) those
+
+    source: https://github.com/jsilter/dbpedia_classify/blob/part3/custom_callbacks.py
     """
 
     def __init__(self, *args, **kwargs):

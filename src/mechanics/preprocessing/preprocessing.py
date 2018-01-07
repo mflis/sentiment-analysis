@@ -1,11 +1,6 @@
 import csv
 
-# noinspection PyUnresolvedReferences
-import numpy as np
 import pandas as pd
-
-RANDOM_SEED = 7
-TEST_SPLIT = 0.20
 
 
 def flatten(vector):
@@ -21,12 +16,6 @@ def binarize_score(csv_raw: pd.DataFrame):
     return csv_raw.Score.map(lambda x: 1 if int(x) < 3 else 0)
 
 
-# todo refactor into dict
-# df = odf[odf['Score'] != 3]
-# X = df['Text']
-# y_dict = {1:0, 2:0, 4:1, 5:1}
-# y = df['Score'].map(y_dict)
-
 def getColumns(filepath, rows_cut):
     raw_csv = read_csv(filepath, rows_cut)
     cleaned_csv = filter_invalid_data(raw_csv)
@@ -41,5 +30,3 @@ def read_csv(filepath, rows_cut):
                        na_filter=False, memory_map=True, dtype={'Score': str, 'Text': str})
 
 
-def conv(list_arg):
-    return np.asarray(list_arg).reshape(-1, 1)
