@@ -1,4 +1,10 @@
+- name: ensure local fetch directory exists
+  local_action:
+      module: file
+      path: "{{ fetch_dir }}"
+      state: directory
+
 - synchronize:
     src: ~/sentiment-analysis/results/
-    dest: "~/PycharmProjects/tensorflow-playgound/remote-results/{{ fetch_dir }}"
+    dest:  "{{ fetch_dir }}"
     mode: pull
