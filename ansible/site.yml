@@ -6,8 +6,8 @@
 - hosts: launched
   roles:
   - prepare
-#  - tensorflow
-#  - fetch
+  - tensorflow
+  - fetch
 
 - hosts: localhost
   connection: local

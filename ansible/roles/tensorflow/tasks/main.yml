@@ -4,7 +4,7 @@
   poll: 0
 
 - name: Run tensorflow
-  command: python3 src/{{type}}.py with {{type}}_config.yaml {{params}} --file_storage="sacred-logs/{{ ansible_default_ipv4.address }}"
+  command: python3 src/{{type}}.py with {{type}}-config.yaml {{params}} --file_storage="sacred-logs/{{ ansible_default_ipv4.address }}"
   args:
     chdir: /home/ec2-user/sentiment-analysis
   async: 50000

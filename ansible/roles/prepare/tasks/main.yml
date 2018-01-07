@@ -13,9 +13,9 @@
     - results/logs
     - sacred-logs
 
-- name: Unarchive glove data
+- name: download glove data
   unarchive:
-    src: http://nlp.stanford.edu/data/glove.6B.zip
+    src: https://s3.amazonaws.com/sentiment-data-mflis/glove50.zip
     dest: ~/sentiment-analysis/data/glove
     creates: ~/sentiment-analysis/data/glove/glove.6B.50d.txt
     remote_src: yes

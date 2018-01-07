@@ -1,2 +1,2 @@
-main: cnn
+type: cnn
 params: " "
