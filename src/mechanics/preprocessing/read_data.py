@@ -1,4 +1,5 @@
 import os
+import re
 
 # noinspection PyUnresolvedReferences
 import numpy as np
@@ -31,9 +32,10 @@ def my_config():
 @data_ingredient.capture
 def load_sentences(sentences_path, rows_cut, dictionary_limit, max_sequence_length):
     texts, labels = getColumns(sentences_path, rows_cut=rows_cut)
+    cleaned_texts = [clean_str(x) for x in texts]
     tokenizer = Tokenizer(num_words=dictionary_limit)
-    tokenizer.fit_on_texts(texts)
-    sequences = tokenizer.texts_to_sequences(texts)
+    tokenizer.fit_on_texts(cleaned_texts)
+    sequences = tokenizer.texts_to_sequences(cleaned_texts)
     word_index = tokenizer.word_index
     data = pad_sequences(sequences, maxlen=max_sequence_length)
     return labels, word_index, data
@@ -88,3 +90,23 @@ def prepare_embedding_layer(glove_path, word_index, dictionary_limit, embedding_
                                 input_length=max_sequence_length,
                                 trainable=embedding_trainable)
     return embedding_layer
+
+
+def clean_str(string):
+    """
+    Original taken from https://github.com/yoonkim/CNN_sentence/blob/master/process_data.py
+    """
+    string = re.sub(r"[^A-Za-z0-9(),!?\'\`]", " ", string)
+    string = re.sub(r"\'s", " \'s", string)
+    string = re.sub(r"\'ve", " \'ve", string)
+    string = re.sub(r"n\'t", " n\'t", string)
+    string = re.sub(r"\'re", " \'re", string)
+    string = re.sub(r"\'d", " \'d", string)
+    string = re.sub(r"\'ll", " \'ll", string)
+    string = re.sub(r",", " , ", string)
+    string = re.sub(r"!", " ! ", string)
+    string = re.sub(r"\(", " \( ", string)
+    string = re.sub(r"\)", " \) ", string)
+    string = re.sub(r"\?", " \? ", string)
+    string = re.sub(r"\s{2,}", " ", string)
+    return string.strip().lower()
