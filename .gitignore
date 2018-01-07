@@ -4,6 +4,7 @@ ansible/export_aws.sh
 *.retry
 results_all/
 results/
+remote-results/
 data/
 **/.ipynb_checkpoints
 **/__pycache__
