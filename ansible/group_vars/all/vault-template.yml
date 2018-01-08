@@ -1,0 +1,6 @@
+---
+vault_ec2_access_key:
+vault_ec2_secret_key:
+vault_github_token:
+aws_security_group:
+aws_keypair:

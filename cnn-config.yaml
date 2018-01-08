@@ -6,3 +6,4 @@ dataset:
   rows_cut : 200000
   glove_file: 'data/glove/glove.6B.50d.txt'
   embedding_dim: 50
+  embedding_trainable: true
